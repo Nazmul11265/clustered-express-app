@@ -1,0 +1,14 @@
+services:
+  app:
+    image: nodeapp:v2  # The Docker image for your app
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 1       # Update one replica at a time
+        delay: 10s           # Wait 10 seconds between updates
+      restart_policy:
+        condition: on-failure
